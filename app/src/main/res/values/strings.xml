@@ -3,9 +3,9 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="logIn">Sign In</string>
-    <string name="not_registered">Not Registered? </string>
-    <string name="registered">REGISTERED</string>
     <string name="name">Name</string>
     <string name="registrer">Register</string>
-    <string name="enter_your_details">Enter your details :</string>
+    <string name="enter_your_details">Create your account :</string>
+    <string name="sign_up_here">Sign up here!</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
 </resources>

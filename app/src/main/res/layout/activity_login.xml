@@ -55,14 +55,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:text="@string/not_registered" />
+            android:text="@string/don_t_have_an_account" />
 
         <TextView
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
-            android:text="@string/registered"
+            android:text="@string/sign_up_here"
             android:textStyle="bold"
             android:textColor="#163675"/>
 
