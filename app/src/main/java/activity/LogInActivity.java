@@ -1,4 +1,4 @@
-package com.dam.shoppinglist;
+package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,18 +8,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.dam.shoppinglist.R;
+
+import database.DataBaseHelper;
 
 public class LogInActivity extends AppCompatActivity {
 
-    EditText et_email;
-    EditText et_password;
-    Button btn_login;
-    TextView tv_register;
+    private DataBaseHelper db;
+    private EditText et_email;
+    private EditText et_password;
+    private Button btn_login;
+    private TextView tv_register;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        db = new DataBaseHelper(LogInActivity.this);
 
         et_email = (EditText)findViewById(R.id.et_email);
         et_password = (EditText)findViewById(R.id.et_password);
@@ -29,9 +38,17 @@ public class LogInActivity extends AppCompatActivity {
         tv_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent registerIntent = new Intent(LogInActivity.this,RegisterActivity.class);
+                Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
             }
         });
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }

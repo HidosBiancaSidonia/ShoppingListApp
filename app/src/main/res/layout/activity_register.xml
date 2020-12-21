@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
+    tools:context="activity.RegisterActivity"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:background="@drawable/background">
@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:text="@string/enter_your_details"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -58,5 +58,27 @@
         android:background="#acacfa"
         android:text="@string/registrer"
         android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="@string/don_you_have_an_account" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/sign_in_here"
+            android:textStyle="bold"
+            android:textColor="#163675"/>
+
+    </LinearLayout>
 
 </LinearLayout>
