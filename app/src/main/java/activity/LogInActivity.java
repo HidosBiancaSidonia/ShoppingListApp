@@ -66,8 +66,9 @@ public class LogInActivity extends AppCompatActivity {
                 if(password.length() > 4){
                     ArrayList<User> users = db.getAllUsers();
                     for (User user : users) {
-                        if(email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+                        if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
                             verify = true;
+                            break;
                         }
                     }
 
