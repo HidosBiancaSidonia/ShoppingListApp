@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/img_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="activity.LogInActivity"
-    android:background="@drawable/background">
+    tools:context="activity.LogInActivity">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:contentDescription="@string/contentDes"
         app:srcCompat="@drawable/shoppinglist" />
 
     <EditText
@@ -22,7 +24,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:drawableLeft="@drawable/username"
+        android:autofillHints=""
+        android:drawableStart="@drawable/username"
         android:hint="@string/email"
         android:inputType="textEmailAddress" />
 
@@ -33,7 +36,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
-        android:drawableLeft="@drawable/password"
+        android:autofillHints=""
+        android:drawableStart="@drawable/password"
         android:hint="@string/password"
         android:inputType="textPassword" />
 
@@ -61,10 +65,10 @@
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="@string/sign_up_here"
-            android:textStyle="bold"
-            android:textColor="#163675"/>
+            android:textColor="#163675"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

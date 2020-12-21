@@ -9,16 +9,26 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
+import model.User;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
-    private Context context;
+    private final Context context;
     private static final String DATABASE_NAME = "ShoppingListApp.db";
     private static final int DATABASE_VERSION = 1;
 
-    private static final String TABLE_NAME = "User";
-    private static final String COLUMN_ID = "id";
-    private static final String COLUMN_NAME = "name";
-    private static final String COLUMN_EMAIL = "email";
-    private static final String COLUMN_PASSWORD = "password";
+    private static final String TABLE_USER = "User";
+    private static final String COLUMN_USER_ID = "id";
+    private static final String COLUMN_USER_NAME = "name";
+    private static final String COLUMN_USER_EMAIL = "email";
+    private static final String COLUMN_USER_PASSWORD = "password";
+
+    private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
+            + COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_USER_NAME + " TEXT,"
+            + COLUMN_USER_EMAIL + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+    // drop table sql query
+    private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -27,36 +37,53 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " +TABLE_NAME+
-                " (" + COLUMN_ID + "INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_NAME + "TEXT, "+
-                COLUMN_EMAIL + "TEXT, "+
-                COLUMN_PASSWORD + "TEXT);";
-
-        db.execSQL(query);
+        db.execSQL(CREATE_USER_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL(DROP_USER_TABLE);
         onCreate(db);
     }
 
-    public void addUser(String name, String email, String password){
+    public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NAME, user.getName());
+        values.put(COLUMN_USER_EMAIL, user.getEmail());
+        values.put(COLUMN_USER_PASSWORD, user.getPassword());
 
-        cv.put(COLUMN_NAME, name);
-        cv.put(COLUMN_EMAIL, email);
-        cv.put(COLUMN_PASSWORD, password);
+        db.insert(TABLE_USER, null, values);
+        db.close();
+    }
 
-        long result = db.insert(TABLE_NAME, null, cv);
-        if(result == -1){
-            Toast.makeText(context,"Failed to add!",Toast.LENGTH_SHORT).show();
+    public ArrayList<User> getAllUsers() {
+
+        String[] columns = {
+                COLUMN_USER_ID,
+                COLUMN_USER_EMAIL,
+                COLUMN_USER_NAME,
+                COLUMN_USER_PASSWORD
+        };
+
+        String sortOrder = COLUMN_USER_NAME + " ASC";
+        ArrayList<User> userList = new ArrayList<User>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USER, columns, null, null, null, null, sortOrder);
+
+        if (cursor.moveToFirst()) {
+            do {
+                User user = new User(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_USER_ID))),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                userList.add(user);
+            } while (cursor.moveToNext());
         }
-        else
-        {
-            Toast.makeText(context,"Success add!",Toast.LENGTH_SHORT).show();
-        }
+        cursor.close();
+        db.close();
+
+        return userList;
     }
 }

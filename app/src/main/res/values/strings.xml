@@ -10,4 +10,5 @@
     <string name="don_t_have_an_account">Do not have an account?</string>
     <string name="sign_in_here">Sign in here!</string>
     <string name="don_you_have_an_account">Do you have an account?</string>
+    <string name="contentDes">Content Des</string>
 </resources>

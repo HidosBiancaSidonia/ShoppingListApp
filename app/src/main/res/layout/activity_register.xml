@@ -26,7 +26,10 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="30dp"
         android:background="#d5bed1"
-        android:hint="@string/name"/>
+        android:inputType="text"
+        android:maxLines="1"
+        android:hint="@string/name"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/et2_email"
@@ -37,7 +40,9 @@
         android:layout_marginRight="30dp"
         android:background="#d5bed1"
         android:hint="@string/email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/et2_password"
@@ -48,7 +53,9 @@
         android:layout_marginRight="30dp"
         android:hint="@string/password"
         android:background="#d5bed1"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/btn_register"
@@ -74,7 +81,7 @@
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="@string/sign_in_here"
             android:textStyle="bold"
             android:textColor="#163675"/>

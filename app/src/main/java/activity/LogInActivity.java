@@ -11,16 +11,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dam.shoppinglist.R;
+import com.dam.shoppinglist.ShoppingListActivity;
+
+import java.util.ArrayList;
 
 import database.DataBaseHelper;
+import model.User;
 
 public class LogInActivity extends AppCompatActivity {
 
-    private DataBaseHelper db;
-    private EditText et_email;
-    private EditText et_password;
-    private Button btn_login;
-    private TextView tv_register;
+    private DataBaseHelper db = null;
+    private EditText et_email = null;
+    private EditText et_password = null;
+    private Button btn_login = null;
+    private TextView tv_register = null;
 
 
     @Override
@@ -35,20 +39,55 @@ public class LogInActivity extends AppCompatActivity {
         btn_login = (Button)findViewById(R.id.btn_login);
         tv_register = (TextView)findViewById(R.id.tv_register);
 
-        tv_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
-            }
+        tv_register.setOnClickListener(v -> {
+            Intent registerIntent = new Intent(LogInActivity.this, RegisterActivity.class);
+            startActivity(registerIntent);
         });
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        btn_login.setOnClickListener(v -> {
+            if(verifyFromSQLite()){
+                Intent shoppingListIntent = new Intent(LogInActivity.this, ShoppingListActivity.class);
+                startActivity(shoppingListIntent);
             }
         });
+    }
 
+    private boolean verifyFromSQLite(){
+
+        String email = (String) et_email.getText().toString().trim();
+        String password = (String) et_password.getText().toString().trim();
+
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.[a-z]+";
+
+        boolean verify = false;
+
+        if(!email.equals("") && !password.equals("")) {
+            if(email.matches(emailPattern) ) {
+                if(password.length() > 4){
+                    ArrayList<User> users = db.getAllUsers();
+                    for (User user : users) {
+                        if(email.equals(user.getEmail()) && password.equals(user.getPassword())) {
+                            verify = true;
+                        }
+                    }
+
+                    if(!verify){
+                        Toast.makeText(getApplicationContext(),"Email address or password is incorrect!",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),"The password must contain at least 5 characters!",Toast.LENGTH_SHORT).show();
+                }
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Invalid email address!",Toast.LENGTH_SHORT).show();
+            }
+        }
+        else {
+            verify = false;
+            Toast.makeText(LogInActivity.this,"All fields must be completed!",Toast.LENGTH_SHORT).show();
+        }
+        return verify;
     }
 }
