@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dam.shoppinglist.R;
-import com.dam.shoppinglist.ShoppingListActivity;
 
 import java.util.ArrayList;
 
@@ -26,6 +24,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button btn_login = null;
     private TextView tv_register = null;
 
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +46,7 @@ public class LogInActivity extends AppCompatActivity {
         btn_login.setOnClickListener(v -> {
             if(verifyFromSQLite()){
                 Intent shoppingListIntent = new Intent(LogInActivity.this, ShoppingListActivity.class);
+                shoppingListIntent.putExtra("nameUser",name);
                 startActivity(shoppingListIntent);
             }
         });
@@ -68,6 +68,7 @@ public class LogInActivity extends AppCompatActivity {
                     for (User user : users) {
                         if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
                             verify = true;
+                            name = user.getName();
                             break;
                         }
                     }
