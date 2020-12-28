@@ -58,7 +58,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         loadLists();
     }
 
-    private void loadLists() {
+    public void loadLists() {
         ArrayList<List> lists = db.getAllLists();
         ArrayList<String> listsDate = new ArrayList<String>() ;
 
@@ -76,6 +76,7 @@ public class ShoppingListActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent productListIntent = new Intent(ShoppingListActivity.this, ProductsActivity.class);
                     productListIntent.putExtra("idList",db.findIdList(listsDate.get(position)).toString());
+                    productListIntent.putExtra("idUser",idUser.toString());
                     startActivity(productListIntent);
                 }
             });
@@ -149,22 +150,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         boolean verify;
         List list = new List(date,idUser);
         db.addList(list);
-        loadLists();
-    }
-
-    public void Click_DeleteList(View view) {
-
-        TextView dateTextView = (TextView)findViewById(R.id.list_date);
-        String date = String.valueOf(dateTextView.getText());
-        ArrayList<List> lists = db.getAllLists();
-        int id_list = 0;
-        for (List list:lists) {
-            if(list.getDate().equals(date)) {
-                id_list = list.getId_list();
-            }
-        }
-
-        db.deleteList(id_list);
         loadLists();
     }
 }

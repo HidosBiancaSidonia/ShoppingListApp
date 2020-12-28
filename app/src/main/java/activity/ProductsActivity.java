@@ -31,6 +31,7 @@ public class ProductsActivity extends AppCompatActivity {
 
     private TextView date_tw;
     private Integer idList;
+    private Integer idUser;
     private DataBaseHelper db = null;
     private EditText number = null;
     private EditText product_name = null;
@@ -47,6 +48,7 @@ public class ProductsActivity extends AppCompatActivity {
         date_tw = (TextView)findViewById(R.id.date_tw);
         Intent myIntent = getIntent();
         idList = Integer.parseInt(myIntent.getStringExtra("idList"));
+        idUser = Integer.parseInt(myIntent.getStringExtra("idUser"));
 
         date_tw.setText(db.findDateTime(idList));
 
@@ -86,5 +88,12 @@ public class ProductsActivity extends AppCompatActivity {
     private void emptyInputEditText() {
         number.setText(null);
         product_name.setText(null);
+    }
+
+    public void Click_DeleteList(View view) {
+        db.deleteList(idList);
+        Intent shoppingListIntent = new Intent(ProductsActivity.this, ShoppingListActivity.class);
+        shoppingListIntent.putExtra("idUser",idUser.toString());
+        startActivity(shoppingListIntent);
     }
 }
