@@ -7,21 +7,38 @@
     tools:context="activity.ShoppingListActivity"
     android:id="@+id/drawer_layout">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/purple">
+
 
         <include
             layout="@layout/main_toolbar"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Home"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-    </LinearLayout>
+
+        <ListView
+            android:layout_marginTop="90dp"
+            android:layout_width="410dp"
+            android:layout_height="500dp"
+            android:id="@+id/listView_lv"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginTop="600dp"
+            android:src="@drawable/add" />
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="310dp"
+            android:layout_marginTop="610dp"
+            android:alpha="0.0"
+            android:id="@+id/add_btn"/>
+
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="300dp"

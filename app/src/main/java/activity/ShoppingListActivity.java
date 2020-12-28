@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,8 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     TextView name_usr;
     DrawerLayout drawerLayout;
+    Button add_button;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,10 @@ public class ShoppingListActivity extends AppCompatActivity {
         System.out.println(nameUser);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+
+        add_button = (Button)findViewById(R.id.add_btn);
+        listView = (ListView)findViewById(R.id.listView_lv);
+
     }
 
     public void ClickMenu(View view){
