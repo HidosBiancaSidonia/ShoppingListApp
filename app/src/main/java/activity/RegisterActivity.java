@@ -47,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(v -> {
            if(postDataToSQLite()){
                emptyInputEditText();
+               Toast.makeText(getApplicationContext(),"The sign up was successful!",Toast.LENGTH_SHORT).show();
            }
         });
     }

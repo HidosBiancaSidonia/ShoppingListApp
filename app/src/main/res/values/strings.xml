@@ -22,4 +22,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="list_with_date_time">List with date time</string>
+    <string name="product">Product</string>
+    <string name="number">Number</string>
+    <string name="add_product">add product</string>
 </resources>

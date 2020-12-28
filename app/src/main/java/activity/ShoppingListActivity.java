@@ -1,14 +1,18 @@
 package activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -16,30 +20,71 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.dam.shoppinglist.R;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+import database.DataBaseHelper;
+import model.List;
+
 public class ShoppingListActivity extends AppCompatActivity {
 
-    TextView name_usr;
-    DrawerLayout drawerLayout;
-    Button add_button;
-    ListView listView;
+    private TextView name_usr;
+    private DrawerLayout drawerLayout;
+    private ListView listView;
+    private ArrayAdapter<String> mAdapter;
+    private DataBaseHelper db = null;
+    private Integer idUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_list);
 
+        db = new DataBaseHelper(ShoppingListActivity.this);
+
         name_usr = (TextView)findViewById(R.id.name_user);
         Intent myIntent = getIntent();
-        String nameUser = myIntent.getStringExtra("nameUser");
-        name_usr.setText(nameUser);
+        idUser = Integer.parseInt(myIntent.getStringExtra("idUser"));
 
-        System.out.println(nameUser);
+
+        name_usr.setText(db.findNameUser(idUser));
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-
-        add_button = (Button)findViewById(R.id.add_btn);
         listView = (ListView)findViewById(R.id.listView_lv);
 
+        loadLists();
+    }
+
+    private void loadLists() {
+        ArrayList<List> lists = db.getAllLists();
+        ArrayList<String> listsDate = new ArrayList<String>() ;
+
+        for (List list:lists) {
+            if(list.getId_user_Fk().equals(idUser)) {
+                listsDate.add(list.getDate());
+            }
+        }
+
+        if(mAdapter==null){
+            mAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listsDate);
+            listView.setAdapter(mAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent productListIntent = new Intent(ShoppingListActivity.this, ProductsActivity.class);
+                    productListIntent.putExtra("idList",db.findIdList(listsDate.get(position)).toString());
+                    startActivity(productListIntent);
+                }
+            });
+        }
+        else{
+            mAdapter.clear();
+            mAdapter.addAll(listsDate);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     public void ClickMenu(View view){
@@ -55,10 +100,6 @@ public class ShoppingListActivity extends AppCompatActivity {
         if(drawerLayout1.isDrawerOpen(GravityCompat.START)){
             drawerLayout1.closeDrawer(GravityCompat.START);
         }
-    }
-
-    public void ClickShoppingList(View view){
-        recreate();
     }
 
     public void ClickLogOut(View view){
@@ -97,5 +138,33 @@ public class ShoppingListActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         closeDrawer(drawerLayout);
+    }
+
+    public void ClickAdd(View view) {
+        addListToSQLite();
+    }
+
+    private void addListToSQLite(){
+        @SuppressLint("SimpleDateFormat") String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        boolean verify;
+        List list = new List(date,idUser);
+        db.addList(list);
+        loadLists();
+    }
+
+    public void Click_DeleteList(View view) {
+
+        TextView dateTextView = (TextView)findViewById(R.id.list_date);
+        String date = String.valueOf(dateTextView.getText());
+        ArrayList<List> lists = db.getAllLists();
+        int id_list = 0;
+        for (List list:lists) {
+            if(list.getDate().equals(date)) {
+                id_list = list.getId_list();
+            }
+        }
+
+        db.deleteList(id_list);
+        loadLists();
     }
 }

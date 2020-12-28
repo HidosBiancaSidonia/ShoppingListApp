@@ -26,29 +26,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:background="#800080"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:onClick="ClickShoppingList"
-        android:layout_marginTop="30dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_list"
-            android:layout_marginStart="40dp"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Shopping List"
-            android:textColor="#800080"
-            android:textStyle="bold"
-            android:padding="12dp"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

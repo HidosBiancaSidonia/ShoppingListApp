@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="activity.ProductsActivity"
+    android:id="@+id/products_layout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/purple">
+
+
+        <include
+            layout="@layout/main_toolbar_products"/>
+
+        <TextView
+            android:id="@+id/date_tw"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="65dp"
+            android:textStyle="bold"
+            android:textColor="@color/indigo"
+            android:textSize="25sp"
+            android:gravity="top|center"/>
+
+        <EditText
+            android:id="@+id/product_number"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="120dp"
+            android:autofillHints=""
+            android:background="#d5bed1"
+            android:hint="@string/number"
+            android:digits="0123456789."
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"/>
+
+        <EditText
+            android:id="@+id/product_name"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="120dp"
+            android:autofillHints=""
+            android:background="#d5bed1"
+            android:hint="@string/product"
+            android:inputType="text"
+            android:maxLines="1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"/>
+
+        <ImageView
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="160dp"
+            android:contentDescription="@string/add_product"
+            android:onClick="ClickAdd"
+            android:src="@drawable/add_product" />
+
+        <ListView
+            android:id="@+id/listView_product"
+            android:layout_width="410dp"
+            android:layout_height="480dp"
+            android:layout_marginTop="250dp"
+            android:choiceMode="singleChoice" />
+
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

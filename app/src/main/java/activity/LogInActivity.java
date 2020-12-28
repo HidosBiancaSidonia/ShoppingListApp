@@ -24,7 +24,7 @@ public class LogInActivity extends AppCompatActivity {
     private Button btn_login = null;
     private TextView tv_register = null;
 
-    private String name;
+    private Integer id_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class LogInActivity extends AppCompatActivity {
         btn_login.setOnClickListener(v -> {
             if(verifyFromSQLite()){
                 Intent shoppingListIntent = new Intent(LogInActivity.this, ShoppingListActivity.class);
-                shoppingListIntent.putExtra("nameUser",name);
+                shoppingListIntent.putExtra("idUser",id_user.toString());
                 startActivity(shoppingListIntent);
             }
         });
@@ -68,7 +68,7 @@ public class LogInActivity extends AppCompatActivity {
                     for (User user : users) {
                         if (email.equals(user.getEmail()) && password.equals(user.getPassword())) {
                             verify = true;
-                            name = user.getName();
+                            id_user = user.getId();
                             break;
                         }
                     }
