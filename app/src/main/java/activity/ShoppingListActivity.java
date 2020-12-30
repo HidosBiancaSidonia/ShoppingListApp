@@ -69,7 +69,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         }
 
         if(mAdapter==null){
-            mAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listsDate);
+            mAdapter=new ArrayAdapter<String>(this,R.layout.row,R.id.list_date,listsDate);
             listView.setAdapter(mAdapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

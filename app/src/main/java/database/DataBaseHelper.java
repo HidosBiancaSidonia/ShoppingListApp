@@ -63,7 +63,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String CREATE_LIST_PRODUCT_TABLE = "CREATE TABLE " + TABLE_LIST_PRODUCT + "("
                 + COLUMN_LIST_PRODUCT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + COLUMN_LIST_PRODUCT_NUMBER + " INTEGER NOT NULL,"
-                +COLUMN_LIST_ID_FK + " INTEGER,"
+                + COLUMN_LIST_ID_FK + " INTEGER,"
                 + COLUMN_PRODUCT_ID_FK + " INTEGER , FOREIGN KEY (" + COLUMN_LIST_ID_FK + ") REFERENCES "+ TABLE_LIST + "(" + COLUMN_LIST_ID + "), " +
                 "FOREIGN KEY (" + COLUMN_PRODUCT_ID_FK + ") REFERENCES "+ TABLE_PRODUCT + "(" + COLUMN_PRODUCT_ID + "));";
 
@@ -183,9 +183,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void addListProduct(ListProduct listProduct) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(COLUMN_LIST_PRODUCT_NUMBER, listProduct.getNumber());
         values.put(COLUMN_LIST_ID_FK, listProduct.getId_list());
         values.put(COLUMN_PRODUCT_ID_FK, listProduct.getId_product());
-        values.put(COLUMN_LIST_PRODUCT_NUMBER, listProduct.getNumber());
+
 
         db.insert(TABLE_LIST_PRODUCT, null, values);
         db.close();
@@ -307,5 +308,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             }
         }
         return null;
+    }
+
+    public void deleteProduct(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_PRODUCT, COLUMN_PRODUCT_ID +  "=" + id, null) ;
+    }
+
+    public void deleteListProduct(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_LIST_PRODUCT, COLUMN_LIST_ID_FK +  "=" + id, null) ;
     }
 }

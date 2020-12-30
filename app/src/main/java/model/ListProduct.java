@@ -6,17 +6,17 @@ public class ListProduct {
     private Integer id_product;
     private Integer number;
 
-    public ListProduct(Integer id_list_product, Integer id_list, Integer id_product, Integer number) {
+    public ListProduct(Integer id_list_product,Integer number, Integer id_list, Integer id_product) {
         this.id_list_product = id_list_product;
         this.id_list = id_list;
         this.id_product = id_product;
         this.number = number;
     }
 
-    public ListProduct(Integer id_list, Integer id_product, Integer number) {
+    public ListProduct(Integer number,Integer id_list, Integer id_product) {
+        this.number = number;
         this.id_list = id_list;
         this.id_product = id_product;
-        this.number = number;
     }
 
     public Integer getId_list_product() {

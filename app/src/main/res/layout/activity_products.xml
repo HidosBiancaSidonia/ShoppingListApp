@@ -16,12 +16,20 @@
 
         <include
             layout="@layout/main_toolbar_products"/>
-
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="65dp"
+            android:textStyle="bold"
+            android:text="The list was created in:"
+            android:textColor="@color/indigo"
+            android:textSize="18sp"
+            android:layout_marginLeft="20dp"/>
         <TextView
             android:id="@+id/date_tw"
             android:layout_width="200dp"
             android:layout_height="40dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="100dp"
             android:textStyle="bold"
             android:textColor="@color/indigo"
             android:textSize="20sp"
@@ -31,7 +39,7 @@
             android:layout_height="40dp"
             android:text="DELETE LIST"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="80dp"
             android:layout_marginRight="20dp"
             android:background="#acacfa"
             android:textColor="@color/black"
@@ -41,7 +49,7 @@
             android:id="@+id/product_number"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="150dp"
             android:autofillHints=""
             android:background="#d5bed1"
             android:hint="@string/number"
@@ -55,7 +63,7 @@
             android:id="@+id/product_name"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="150dp"
             android:autofillHints=""
             android:background="#d5bed1"
             android:hint="@string/product"
@@ -68,7 +76,7 @@
             android:layout_width="170dp"
             android:layout_height="80dp"
             android:layout_marginStart="125dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="190dp"
             android:contentDescription="@string/add_product"
             android:onClick="ClickAdd"
             android:src="@drawable/add_product" />
@@ -77,8 +85,7 @@
             android:id="@+id/listView_product"
             android:layout_width="410dp"
             android:layout_height="480dp"
-            android:layout_marginTop="250dp"
-            android:choiceMode="singleChoice" />
+            android:layout_marginTop="260dp"/>
 
 
     </RelativeLayout>
