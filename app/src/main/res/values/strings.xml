@@ -26,4 +26,6 @@
     <string name="product">Product</string>
     <string name="number">Number</string>
     <string name="add_product">add product</string>
+    <string name="product_list">Product List</string>
+    <string name="list">list</string>
 </resources>

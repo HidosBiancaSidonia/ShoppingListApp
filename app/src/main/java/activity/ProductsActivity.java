@@ -68,10 +68,11 @@ public class ProductsActivity extends AppCompatActivity {
         ArrayList<Integer> id_product = new ArrayList<>();
         ArrayList<String> productName = new ArrayList<>();
 
-
         for (ListProduct lP:listProducts) {
-            number1.add(lP.getNumber());
-            id_product.add(lP.getId_product());
+            if(lP.getId_list() == idList){
+                number1.add(lP.getNumber());
+                id_product.add(lP.getId_product());
+            }
         }
 
         for (Integer id: id_product) {
@@ -84,12 +85,36 @@ public class ProductsActivity extends AppCompatActivity {
         }
 
         if(mAdapter==null){
-            mAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,numberXproduct);
+            mAdapter = new ArrayAdapter<String>(this,R.layout.product_row,R.id.list_product,numberXproduct);
             listView_product.setAdapter(mAdapter);
             listView_product.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    
+                    System.out.println(db.findProduct(id_product.get(position)));
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ProductsActivity.this);
+                    builder.setTitle("Delete product from list");
+                    builder.setMessage("Are you sure you want to delete this/these product/s ?");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            db.deleteProduct(id_product.get(position));
+                            for (ListProduct lP:listProducts) {
+                                if(lP.getId_product()==id_product.get(position)){
+                                    db.deleteListProduct(lP.getId_list_product());
+                                }
+                            }
+                            loadProducts();
+                        }
+                    });
+
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.show();
                 }
             });
         }
@@ -128,8 +153,14 @@ public class ProductsActivity extends AppCompatActivity {
 
     public void Click_DeleteList(View view) {
         db.deleteList(idList);
+        ArrayList<ListProduct> listProducts = db.getAllListProducts();
+        for (ListProduct lP: listProducts) {
+            if(lP.getId_list()==idList){
+                db.deleteProduct(lP.getId_product());
+                db.deleteListProduct(lP.getId_list_product());
+            }
+        }
 
-        //sterge si restul
 
         Intent shoppingListIntent = new Intent(ProductsActivity.this, ShoppingListActivity.class);
         shoppingListIntent.putExtra("idUser",idUser.toString());

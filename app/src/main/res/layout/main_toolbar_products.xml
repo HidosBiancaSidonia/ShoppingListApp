@@ -7,14 +7,19 @@
     android:gravity="center_vertical"
     android:background="@drawable/bar">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:src="@drawable/list"
+        android:contentDescription="@string/list" />
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Products List"
+        android:text="@string/product_list"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textAlignment="center"
+        android:layout_marginStart="20dp"
         android:textColor="#800080"/>
 
 </LinearLayout>

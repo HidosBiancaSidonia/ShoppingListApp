@@ -317,6 +317,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     public void deleteListProduct(Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_LIST_PRODUCT, COLUMN_LIST_ID_FK +  "=" + id, null) ;
+        db.delete(TABLE_LIST_PRODUCT, COLUMN_LIST_PRODUCT_ID +  "=" + id, null) ;
     }
 }
