@@ -1,15 +1,10 @@
 package activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,10 +18,8 @@ import com.dam.shoppinglist.R;
 import java.util.ArrayList;
 
 import database.DataBaseHelper;
-import model.List;
 import model.ListProduct;
 import model.Product;
-import util.NumberXProduct;
 
 public class ProductsActivity extends AppCompatActivity {
 
